@@ -32,6 +32,29 @@ class QuestionModelTests(TestCase):
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
+    def test_is_published_old(self):
+        time = timezone.now() - datetime.timedelta(days=1, seconds=1)
+        future_question = Question(pub_date=time)
+        self.assertIs(future_question.is_published(),False)
+
+    def test_is_published_now(self):
+        time = timezone.now()
+        future_question = Question(pub_date=time)
+        self.assertIs(future_question.is_published(),False)
+
+    def test_can_vote_true(self):
+        time = timezone.now()
+        new_pub_date = timezone.now() - datetime.timedelta(days=1, seconds=1)
+        new_end_date = timezone.now() + datetime.timedelta(days=1, seconds=1)
+        now_can_vote = Question(pub_date = new_pub_date, end_date= new_end_date)
+        self.assertIs(now_can_vote.can_vote(),True)
+
+    def test_can_vote_fault(self):
+        time = timezone.now()
+        new_pub_date = timezone.now()
+        new_end_date = timezone.now()
+        can_not_vote = Question(pub_date = new_pub_date, end_date= new_end_date)
+        self.assertIs(can_not_vote.can_vote(),False)
 def create_question(question_text, days):
     """
     Create a question with the given `question_text` and published the
