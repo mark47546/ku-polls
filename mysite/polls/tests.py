@@ -4,7 +4,9 @@ from django.utils import timezone
 from .models import Question
 from django.urls import reverse
 
-
+'''
+test of question model
+'''
 class QuestionModelTests(TestCase):
     def test_was_published_recently_with_future_question(self):
         """
@@ -36,16 +38,25 @@ class QuestionModelTests(TestCase):
         self.assertIs(recent_question.was_published_recently(), True)
 
     def test_is_published_old(self):
+        '''
+        return fault if it use future question with published old in past
+        '''
         time = timezone.now() - datetime.timedelta(days=1, seconds=1)
         future_question = Question(pub_date=time)
         self.assertIs(future_question.is_published(), False)
 
     def test_is_published_now(self):
+        '''
+        return fault if it use future question with published now
+        '''
         time = timezone.now()
         future_question = Question(pub_date=time)
         self.assertIs(future_question.is_published(), False)
 
     def test_can_vote_true(self):
+        '''
+        return true if it can vote
+        '''
         time = timezone.now()
         new_pub_date = time - datetime.timedelta(days=1, seconds=1)
         new_end_date = time + datetime.timedelta(days=1, seconds=1)
@@ -53,6 +64,9 @@ class QuestionModelTests(TestCase):
         self.assertIs(now_can_vote.can_vote(), True)
 
     def test_can_vote_fault(self):
+        '''
+        return fault if can not vote
+        '''
         time = timezone.now()
         new_pub_date = time
         new_end_date = time
