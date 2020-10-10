@@ -2,12 +2,16 @@ from django.contrib import admin
 
 from .models import Choice, Question
 
-
+'''
+choices for admin
+'''
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 3
 
-
+'''
+question for admin
+'''
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['question_text']}),
