@@ -1,5 +1,6 @@
 # Ku-Polls
 [![Build Status](https://travis-ci.com/mark47546/ku-polls.svg?branch=master)](https://travis-ci.com/mark47546/ku-polls)
+[![codecov](https://codecov.io/gh/mark47546/ku-polls/branch/master/graph/badge.svg)](https://codecov.io/gh/mark47546/ku-polls)
 
 Django application for Kasetsart University online polls
 ## Documents
